@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forio Challenge</title>
+    </head>
+    <body>
+        <ul>
+            <li>5</li>
+            <li>4</li>
+            <li>6</li>
+            <li>2</li>
+            <li>7</li>
+            <li>1</li>
+            <li>3</li>
+            <li>8</li>
+            <li>24</li>
+        </ul>
+    </body>
+    <script>
+        const body = document.querySelector("body");
+        const ul = document.querySelector("ul");
+        const list = document.querySelectorAll("li");
+        body.removeChild(ul);
+
+        const listElements = Object.values(list).map(l => +l.innerHTML).sort((a,b)=>a-b);
+
+        function func(array) {
+            const u = document.createElement("ul");
+            array.map(num => {
+                const li = document.createElement("li");
+                li.textContent = num
+                body.appendChild(u);
+                u.appendChild(li);
+            });
+        }
+
+        let arr = [];
+
+        for (let el of listElements) {
+            if (arr.length < 3) {
+                arr.push(el);
+                if (arr.length == 2) {
+                    func(arr);
+                    arr = [];
+                }
+                if (arr.length == 1 && listElements.at(-1) == el) {
+                    func(arr);
+                }
+            }
+        }
+    </script>
+</html>
